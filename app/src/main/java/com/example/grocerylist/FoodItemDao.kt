@@ -13,6 +13,9 @@ interface FoodItemDao{
     @Query("SELECT * FROM grocery_table order BY item_name DESC")
     fun getItems(): LiveData<List<FoodItem>>
 
+    @Query("SELECT * FROM grocery_table order BY department DESC")
+    fun sortDepartment(): LiveData<List<FoodItem>>
+
     @Query ("DELETE FROM grocery_table")
     fun DeleteAll()
 

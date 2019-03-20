@@ -3,7 +3,7 @@ package com.example.grocerylist
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 
-class FoodItemRepository(private val movieDao: MovieItemDao){
+class FoodItemRepository(private val movieDao: FoodItemDao){
 
     val allMovies: LiveData<List<FoodItem>> = movieDao.getItems()
 

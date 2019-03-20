@@ -1,102 +1,106 @@
 package com.example.grocerylist
 
-import android.content.Context
-import android.net.Uri
+import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ListView
+import androidx.fragment.app.Fragment
+import android.widget.EditText
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [IndividualList.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [IndividualList.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
+
 class IndividualList : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var v: View
+
+    // Button that opens dialog
+    private var addButton: Button? = null
+
+    //text field for item name
+    private var nameEdit: EditText? = null
+    //text field for item price
+    private var priceEdit: EditText? = null
+    //text field for item quant
+    private var quantityEdit: EditText? = null
+    //text field for item dept
+    private var departmentEdit: EditText? = null
+
+    //dialog view
+    private var popupView: View? = null
+    //button that adds new item
+    private var saveItem: Button? = null
+    //button that closes dialog
+    private var closeItem: Button? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        v = inflater.inflate(R.layout.fragment_individual_list, container, false)
+        //val model = activity?.let { ViewModelProviders.of(it).get(MyViewModel::class.java)}
+
+        //Clicking open dialog
+        addButton?.setOnClickListener(View.OnClickListener {
+
+            //Creates alertDialogBuilder
+            val alertDialogBuilder = AlertDialog.Builder(this@IndividualList)
+            // Sets title icon can not cancel properties.
+            alertDialogBuilder.setTitle("Item Data Dialog")
+            alertDialogBuilder.setIcon(R.drawable.ic_launcher_background)
+            alertDialogBuilder.setCancelable(false)
+
+            // Initialize popup dialog view
+            initPopupViewControls()
+
+            // Set the inflated layout view object to the AlertDialog builder
+            alertDialogBuilder.setView(popupView)
+
+            //Creates and shows alert dialog
+            val alertDialog = alertDialogBuilder.create()
+            alertDialog.show()
+
+            //on clicking save item button
+            saveItem?.setOnClickListener(View.OnClickListener {
+                // Gets item data from user dialog
+                val name = nameEdit?.getText().toString()
+                val price = priceEdit?.getText().toString()
+                val quantity = quantityEdit?.getText().toString()
+                val dept = departmentEdit?.getText().toString()
+
+                alertDialog.cancel()
+            })
+            closeItem.setOnClickListener(View.OnClickListener { alertDialog.cancel() })
+        })
+
         return inflater.inflate(R.layout.fragment_individual_list, container, false)
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+    /* Initiliazie button controls */
+    private fun initMainActivityControls() {
+        if (addButton == null) {
+            addButton = v.findViewById(R.id.add_button) as Button
         }
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
+    /* Initialize popup dialog view and buttons */
+    private fun initPopupViewControls() {
+        // Get layout inflater object.
+        val layoutInflater = LayoutInflater.from(this@IndividualList)
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments]
-     * (http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
+        //Inflates popup dialog from its xml
+        popupView = layoutInflater.inflate(R.layout.popup_input_dialog, null)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment IndividualList.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            IndividualList().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        // Gets the ui controls in dialog box
+        nameEdit = popupView?.findViewById(R.id.name) as EditText
+        priceEdit = popupView?.findViewById(R.id.price) as EditText
+        quantityEdit = popupView?.findViewById(R.id.quantity) as EditText
+        departmentEdit = popupView?.findViewById(R.id.department) as EditText
+        saveItem = popupView?.findViewById(R.id.addItem)
+        closeItem = popupView?.findViewById(R.id.closeItem)
     }
 }

@@ -17,12 +17,12 @@
             android:id="@+id/item" app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/list price"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/list_price"
     />
     <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/department"
+            android:layout_height="wrap_content" android:id="@+id/departmentT"
             android:layout_marginTop="40dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView" android:layout_marginStart="8dp"/>

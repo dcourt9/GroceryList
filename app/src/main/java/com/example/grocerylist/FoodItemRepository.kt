@@ -16,6 +16,4 @@ class FoodItemRepository(private val movieDao: FoodItemDao){
     fun deleteAll(){
         movieDao.DeleteAll()
     }
-
-
 }

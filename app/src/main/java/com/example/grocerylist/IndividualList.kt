@@ -48,7 +48,7 @@ class IndividualList : Fragment() {
         addButton?.setOnClickListener(View.OnClickListener {
 
             //Creates alertDialogBuilder
-            val alertDialogBuilder = AlertDialog.Builder(this@IndividualList)
+            val alertDialogBuilder = AlertDialog.Builder(this.context)
             // Sets title icon can not cancel properties.
             alertDialogBuilder.setTitle("Item Data Dialog")
             alertDialogBuilder.setIcon(R.drawable.ic_launcher_background)
@@ -74,7 +74,7 @@ class IndividualList : Fragment() {
 
                 alertDialog.cancel()
             })
-            closeItem.setOnClickListener(View.OnClickListener { alertDialog.cancel() })
+            closeItem?.setOnClickListener(View.OnClickListener { alertDialog.cancel() })
         })
 
         return inflater.inflate(R.layout.fragment_individual_list, container, false)
@@ -90,7 +90,7 @@ class IndividualList : Fragment() {
     /* Initialize popup dialog view and buttons */
     private fun initPopupViewControls() {
         // Get layout inflater object.
-        val layoutInflater = LayoutInflater.from(this@IndividualList)
+        val layoutInflater = LayoutInflater.from(this.context)
 
         //Inflates popup dialog from its xml
         popupView = layoutInflater.inflate(R.layout.popup_input_dialog, null)

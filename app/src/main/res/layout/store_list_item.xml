@@ -18,13 +18,13 @@
             app:layout_constraintTop_toTopOf="parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/list price"
+            android:layout_marginStart="8dp" app:layout_constraintEnd_toStartOf="@+id/list_price"
     />
     <TextView
             android:text="TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/list price" app:layout_constraintStart_toEndOf="@+id/item"
+            android:id="@+id/list_price" app:layout_constraintStart_toEndOf="@+id/item"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintBottom_toBottomOf="parent"
     />

@@ -9,7 +9,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class MovieViewModel(application: Application): AndroidViewModel(application){
+class MyViewModel(application: Application): AndroidViewModel(application){
 
     private var parentJob = Job()
     private val coroutineContext: CoroutineContext

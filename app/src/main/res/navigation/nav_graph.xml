@@ -2,17 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
-            app:startDestination="@id/soreLists">
-
-    <fragment android:id="@+id/soreLists" android:name="com.example.grocerylist.SoreLists"
-              android:label="fragment_store_lists" tools:layout="@layout/fragment_store_lists">
-        <action android:id="@+id/action_soreLists_to_itemLists" app:destination="@id/itemLists"/>
-        <action android:id="@+id/action_soreLists_to_individualList" app:destination="@id/individualList"/>
-    </fragment>
-    <fragment android:id="@+id/itemLists" android:name="com.example.grocerylist.ItemLists"
-              android:label="fragment_item_lists" tools:layout="@layout/fragment_item_lists">
-        <action android:id="@+id/action_itemLists_to_soreLists" app:destination="@id/soreLists"/>
-    </fragment>
+            app:startDestination="@id/individualList">
     <fragment android:id="@+id/individualList" android:name="com.example.grocerylist.IndividualList"
               android:label="fragment_individual_list" tools:layout="@layout/fragment_individual_list"/>
 </navigation>

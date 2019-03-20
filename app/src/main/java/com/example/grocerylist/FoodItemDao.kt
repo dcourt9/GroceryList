@@ -7,23 +7,21 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao
-interface MovieItemDao{
-
-    /** bruh idek
-    @Query("SELECT * FROM movie_table order BY release_date DESC")
-    fun getAllMovies(): LiveData<List<MovieItem>>
+interface FoodItemDao{
 
 
-    @Query ("DELETE FROM movie_table")
+    @Query("SELECT * FROM grocery_table order BY item_name DESC")
+    fun getItems(): LiveData<List<FoodItem>>
+
+    @Query ("DELETE FROM grocery_table")
     fun DeleteAll()
 
     @Insert (onConflict = OnConflictStrategy.REPLACE)
-    fun insertMovie(movie: MovieItem)
+    fun insertItem(item: FoodItem)
 
 
-    @Query("SELECT * FROM movie_table order BY release_date ASC")
-    fun getAllMoviesAsc(): LiveData<List<MovieItem>>
-    **/
+    @Query("SELECT * FROM grocery_table order BY item_name ASC")
+    fun getItemsAsc(): LiveData<List<FoodItem>>
 
 
 

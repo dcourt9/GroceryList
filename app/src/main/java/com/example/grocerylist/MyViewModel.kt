@@ -21,12 +21,12 @@ class MyViewModel(application: Application): AndroidViewModel(application){
 
     private val repository: FoodItemRepository = FoodItemRepository(ItemRoomDatabase.getDatabase(application).itemDao())
 
-    var allMovies: LiveData<List<FoodItem>>
+    var allFoods: LiveData<List<FoodItem>>
 
     private lateinit var sortMovies: LiveData<List<FoodItem>>
 
     init {
-        allMovies = repository.allMovies
+        allFoods = repository.allFoods
     }
 
     //private var currMovie : MovieItemDao_Impl =
@@ -35,11 +35,15 @@ class MyViewModel(application: Application): AndroidViewModel(application){
     private fun showResult(items: Items?) {
         deleteAll()
         items?.results?.forEach { movie ->
-            movie.checked = false
+            //movie.checked = false
             insert(movie)
         }
     }
 
+    fun makeFood(name:String, price:Double, quantity:Double, dept:String){
+        var newFood = FoodItem(name, price, quantity, dept)
+        insert(newFood)
+    }
     private fun insert(item: FoodItem) = scope.launch(Dispatchers.IO) {
         repository.insert(item)
     }

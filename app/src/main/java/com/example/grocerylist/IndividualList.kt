@@ -11,6 +11,8 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProviders
+import android.R.attr.button
+import kotlinx.android.synthetic.main.fragment_individual_list.*
 
 
 class IndividualList : Fragment() {
@@ -18,7 +20,7 @@ class IndividualList : Fragment() {
     //private lateinit var v: View
 
     // Button that opens dialog
-    private var addButton: Button? = null
+    //private var addButton: Button? = null
 
     //text field for item name
     private var nameEdit: EditText? = null
@@ -44,41 +46,43 @@ class IndividualList : Fragment() {
         val v = inflater.inflate(R.layout.fragment_individual_list, container, false)
         val model = activity?.let { ViewModelProviders.of(it).get(MyViewModel::class.java)}
 
-        //addButton = v.findViewById(R.id.add_button) as Button
+        val addButton = v.findViewById<Button>(R.id.add_button)
 
         //Clicking open dialog
-        (v.findViewById(R.id.add_button) as Button).setOnClickListener {
-            //Creates alertDialogBuilder
-            val alertDialogBuilder = AlertDialog.Builder(this.context)
-            // Sets title icon can not cancel properties.
-            alertDialogBuilder.setTitle("Item Data Dialog")
-            alertDialogBuilder.setIcon(R.drawable.ic_launcher_background)
-            alertDialogBuilder.setCancelable(false)
+        addButton?.setOnClickListener {
 
-            // Initialize popup dialog view
-            initPopupViewControls()
+                //Creates alertDialogBuilder
+                val alertDialogBuilder = AlertDialog.Builder(this.context)
+                // Sets title icon can not cancel properties.
+                alertDialogBuilder.setTitle("Item Data Dialog")
+                alertDialogBuilder.setIcon(R.drawable.ic_launcher_background)
+                alertDialogBuilder.setCancelable(false)
 
-            // Set the inflated layout view object to the AlertDialog builder
-            alertDialogBuilder.setView(popupView)
+                // Initialize popup dialog view
+                initPopupViewControls()
 
-            //Creates and shows alert dialog
-            val alertDialog = alertDialogBuilder.create()
-            alertDialog.show()
+                // Set the inflated layout view object to the AlertDialog builder
+                alertDialogBuilder.setView(popupView)
 
-            //on clicking save item button
-            saveItem?.setOnClickListener {
-                // Gets item data from user dialog
-                val name = nameEdit?.getText().toString()
-                val price = priceEdit?.getText().toString()
-                val quantity = quantityEdit?.getText().toString()
-                val dept = departmentEdit?.getText().toString()
+                //Creates and shows alert dialog
+                val alertDialog = alertDialogBuilder.create()
+                alertDialog.show()
 
-                alertDialog.cancel()
-            }
-            closeItem?.setOnClickListener(View.OnClickListener { alertDialog.cancel() })
+                //on clicking save item button
+                saveItem?.setOnClickListener {
+                    // Gets item data from user dialog
+                    val name = nameEdit?.getText().toString()
+                    val price = priceEdit?.getText().toString().toDouble()
+                    val quantity = quantityEdit?.getText().toString().toDouble()
+                    val dept = departmentEdit?.getText().toString()
+                    model?.makeFood(name, price, quantity, dept)
+                    alertDialog.cancel()
+                }
+                closeItem?.setOnClickListener(View.OnClickListener { alertDialog.cancel() })
+
         }
 
-        return inflater.inflate(R.layout.fragment_individual_list, container, false)
+        return v
     }
 
 

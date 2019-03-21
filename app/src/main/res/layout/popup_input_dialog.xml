@@ -69,13 +69,13 @@
             app:layout_constraintTop_toBottomOf="@+id/quantity"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="60dp"/>
     <Button
-            android:text="Button"
+            android:text="Add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/addItem" app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="80dp"
             android:layout_marginTop="100dp" app:layout_constraintTop_toBottomOf="@+id/departmentT"/>
     <Button
-            android:text="Button"
+            android:text="Close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/closeItem"

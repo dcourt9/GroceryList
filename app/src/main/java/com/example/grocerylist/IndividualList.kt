@@ -81,7 +81,7 @@ class IndividualList : Fragment() {
                 this,
                 Observer<List<FoodItem>>{ movies ->
                     movies?.let{
-                        adapter.setItems(it)
+                       // adapter.setItems(it)
                     }
                 }
             )
@@ -173,7 +173,7 @@ class IndividualList : Fragment() {
 
 
         inner class ItemViewHolder(val view: View): RecyclerView.ViewHolder(view), View.OnClickListener{
-            //override fun onClick(view: View?){
+            override fun onClick(view: View?){
 
               //  if (view != null) {
                 //    Navigation.findNavController(view).navigate(R.id.action_listScreen_to_detailScreen)
@@ -181,8 +181,7 @@ class IndividualList : Fragment() {
                 //}
 
 
-            //}
-
+            }
 
         }
     }

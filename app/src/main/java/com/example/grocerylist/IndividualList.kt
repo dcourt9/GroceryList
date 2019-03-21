@@ -43,7 +43,7 @@ class IndividualList : Fragment() {
     ): View? {
         v = inflater.inflate(R.layout.fragment_individual_list, container, false)
         //val model = activity?.let { ViewModelProviders.of(it).get(MyViewModel::class.java)}
-
+        initMainActivityControls()
         //Clicking open dialog
         addButton?.setOnClickListener(View.OnClickListener {
 

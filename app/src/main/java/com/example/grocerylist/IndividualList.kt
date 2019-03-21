@@ -2,6 +2,7 @@ package com.example.grocerylist
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,12 @@ import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import android.widget.EditText
-
-
+import androidx.lifecycle.ViewModelProviders
 
 
 class IndividualList : Fragment() {
 
-    private lateinit var v: View
+    //private lateinit var v: View
 
     // Button that opens dialog
     private var addButton: Button? = null
@@ -41,12 +41,13 @@ class IndividualList : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        v = inflater.inflate(R.layout.fragment_individual_list, container, false)
-        //val model = activity?.let { ViewModelProviders.of(it).get(MyViewModel::class.java)}
-        initMainActivityControls()
-        //Clicking open dialog
-        addButton?.setOnClickListener(View.OnClickListener {
+        val v = inflater.inflate(R.layout.fragment_individual_list, container, false)
+        val model = activity?.let { ViewModelProviders.of(it).get(MyViewModel::class.java)}
 
+        //addButton = v.findViewById(R.id.add_button) as Button
+
+        //Clicking open dialog
+        (v.findViewById(R.id.add_button) as Button).setOnClickListener {
             //Creates alertDialogBuilder
             val alertDialogBuilder = AlertDialog.Builder(this.context)
             // Sets title icon can not cancel properties.
@@ -65,7 +66,7 @@ class IndividualList : Fragment() {
             alertDialog.show()
 
             //on clicking save item button
-            saveItem?.setOnClickListener(View.OnClickListener {
+            saveItem?.setOnClickListener {
                 // Gets item data from user dialog
                 val name = nameEdit?.getText().toString()
                 val price = priceEdit?.getText().toString()
@@ -73,19 +74,13 @@ class IndividualList : Fragment() {
                 val dept = departmentEdit?.getText().toString()
 
                 alertDialog.cancel()
-            })
+            }
             closeItem?.setOnClickListener(View.OnClickListener { alertDialog.cancel() })
-        })
+        }
 
         return inflater.inflate(R.layout.fragment_individual_list, container, false)
     }
 
-    /* Initiliazie button controls */
-    private fun initMainActivityControls() {
-        if (addButton == null) {
-            addButton = v.findViewById(R.id.add_button) as Button
-        }
-    }
 
     /* Initialize popup dialog view and buttons */
     private fun initPopupViewControls() {

@@ -15,7 +15,7 @@ class MyViewModel(application: Application): AndroidViewModel(application){
     private val coroutineContext: CoroutineContext
         get() = parentJob+ Dispatchers.Main
 
-
+    private lateinit var food : FoodItem
     private val scope = CoroutineScope(coroutineContext)
 
 
@@ -31,6 +31,9 @@ class MyViewModel(application: Application): AndroidViewModel(application){
 
     //private var currMovie : MovieItemDao_Impl =
 
+    fun setFood(food:FoodItem){
+        this.food = food
+    }
 
     private fun showResult(items: Items?) {
         deleteAll()

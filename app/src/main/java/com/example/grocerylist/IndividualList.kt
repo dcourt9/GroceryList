@@ -53,6 +53,7 @@ class IndividualList : Fragment() {
             ViewModelProviders.of(this).get(MyViewModel::class.java)
         }
 
+        val recyclerView = v.findViewById<RecyclerView>(R.id.food_list)
         val addButton = v.findViewById<Button>(R.id.add_button)
 
         //Clicking open dialog
@@ -75,13 +76,13 @@ class IndividualList : Fragment() {
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
 
-            val adapter = FoodListAdapter(model)
+            val adapter = FoodListAdapter(model!!)
             recyclerView.adapter = adapter
             model.allFoods.observe(
                 this,
-                Observer<List<FoodItem>>{ movies ->
-                    movies?.let{
-                       // adapter.setItems(it)
+                Observer<List<FoodItem>>{food   ->
+                    food?.let{
+                       adapter.setItem(it)
                     }
                 }
             )
@@ -159,6 +160,8 @@ class IndividualList : Fragment() {
             holder.view.findViewById<TextView>(R.id.departmentT).text=items[position].department
 
             holder.view.findViewById<TextView>(R.id.list_price).text=items[position].price.toString()
+
+            //holder.view.findViewById<TextView>(R.id.quantity).text=items[position].quantity.toString()
 
             //holder.itemView.setOnClickListener(){
 

@@ -15,6 +15,7 @@ import android.R.attr.button
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_individual_list.*
 import kotlinx.android.synthetic.main.fragment_store_lists.*
@@ -54,6 +55,7 @@ class IndividualList : Fragment() {
         }
 
         val recyclerView = v.findViewById<RecyclerView>(R.id.food_list)
+        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         val addButton = v.findViewById<Button>(R.id.add_button)
 
         //Clicking open dialog
